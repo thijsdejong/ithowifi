@@ -187,11 +187,6 @@ void processSettingResult(const uint8_t index, const bool loop)
   root["Index"] = index;
   root["Description"] = settingsPtr->settingsDescriptions[static_cast<int>(*(*(settingsPtr->settingsMapping + version) + index))];
 
-  auto timeoutmillis = millis() + 3000; // 1 sec. + 2 sec. for potential i2c queue pause on CVE devices
-  while (resultPtr2410 == nullptr && millis() < timeoutmillis)
-  {
-    // wait for result
-  }
   root["update"] = true;
   root["loop"] = loop;
   if (resultPtr2410 != nullptr && ithoSettingsArray != nullptr)
