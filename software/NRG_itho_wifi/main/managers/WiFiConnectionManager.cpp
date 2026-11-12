@@ -290,14 +290,14 @@ bool connectWiFiSTA(bool restore)
     setStaticIpConfig();
   }
 
-  delay(2000);
+  delay(WIFI_CONNECT_SETTLE_MS);
 
   // wifiModeAP = false;
   D_LOG("NET: Connecting to wireless network...");
 
   WiFi.begin(wifiConfig.ssid, wifiConfig.passwd);
 
-  auto timeoutmillis = millis() + 30000;
+  auto timeoutmillis = millis() + WIFI_CONNECT_TIMEOUT_MS;
   wl_status_t status = WiFi.status();
 
   while (millis() < timeoutmillis)
