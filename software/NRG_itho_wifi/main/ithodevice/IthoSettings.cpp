@@ -233,11 +233,10 @@ void updateSetting(const uint8_t index, const int32_t value, bool webupdate)
   { // if settings loaded from browser cache, first retrieve the current value of the setting
     i2cQueueAddCmd([index]()
                       { getSetting(index, true, false, false); });
+    const unsigned long timeout_ms = 2000; // 2 seconds
+    const unsigned long start_time = millis();
     while (true) // wait for the setting to be retrieved or timeout after 2 sec
     {
-      unsigned long timeout_ms = 2000; // 2 seconds
-      unsigned long start_time = millis();
-
       if (millis() - start_time > timeout_ms)
       {
         break;
